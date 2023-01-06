@@ -40,6 +40,9 @@ export const getRenderValue = (renderResult:any) => {
     }
     if (sameType(child, 'Object')) {
       const {children} = child.props;
+      if (sameType(children, 'Object')) { // 兼容column render 存在多层嵌套dom情况
+        dealChildren(children)
+      }
       if (sameType(children, 'String') || sameType(children, 'Number')) {
         values.push(children);
       }
